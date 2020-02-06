@@ -1,7 +1,7 @@
+var cssFormatter = require('perfectionist');
 var htmlparser = require('htmlparser2'),
     unsupportedTags = [
         'script',
-        'style'
     ],
     voidElements = [
         'area',
@@ -266,7 +266,16 @@ function renderTag(node) {
         closeTag = '\n' + closeTag;
     }
 
-    return openTag + render(node.children) + closeTag;
+    var renderedChildren = render(node.children);
+
+    if (node.name === 'style') {
+        renderedChildren = cssFormatter.process(renderedChildren, {
+            indentSize: 2,
+            colorShorthand: false,
+        });
+    }
+
+    return openTag + renderedChildren + closeTag;
 }
 
 function renderDirective(node) {

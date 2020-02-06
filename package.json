@@ -6,7 +6,8 @@
   "bin": "cmd.js",
   "dependencies": {
     "htmlparser2": "^3.8.2",
-    "minimist": "^1.1.1"
+    "minimist": "^1.1.1",
+    "perfectionist": "^2.4.0"
   },
   "devDependencies": {},
   "scripts": {
