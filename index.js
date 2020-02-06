@@ -120,6 +120,10 @@ function breakAround(node) {
         return false;
     }
 
+    if (node.type == 'style') {
+        return true;
+    }
+
     if (node.type == 'comment') {
         return options['break-around-comments'];
     }
@@ -269,8 +273,10 @@ function renderTag(node) {
     var renderedChildren = render(node.children);
 
     if (node.name === 'style') {
+        openTag = openTag + '\n';
         renderedChildren = cssFormatter.process(renderedChildren, {
-            indentSize: 2,
+            indentChar: options['indent'][0] || '',
+            indentSize: options['indent'].length,
             colorShorthand: false,
         });
     }
